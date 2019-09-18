@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.bytecode.dbike.R;
@@ -12,6 +13,7 @@ import com.bytecode.dbike.R;
 public class InicialActivity extends AppCompatActivity {
 
     private ProgressBar barraProgesso;
+    private Button btEntrar;
     private int progresso = 0;
 
 
@@ -21,7 +23,15 @@ public class InicialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inicial);
 
         barraProgesso = findViewById(R.id.progressBar);
-        progressoBarra(barraProgesso);
+        btEntrar = findViewById(R.id.buttonEntrar);
+
+        btEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+            }
+        });
+
     }
 
     public void progressoBarra(View view){
@@ -41,14 +51,13 @@ public class InicialActivity extends AppCompatActivity {
                             barraProgesso.setProgress(progresso);
 
                             if(progresso == 100){
-                                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                                startActivity(intent);
+                                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                             }
                         }
                     });
 
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
